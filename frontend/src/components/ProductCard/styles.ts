@@ -4,7 +4,7 @@ export const Card = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 20rem;
+  height: 280px;
   width: 100%;
   border-radius: 12px;
 
@@ -13,6 +13,8 @@ export const Card = styled.div`
   img {
     width: 100%;
     height: 70%;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
   }
 
   div {

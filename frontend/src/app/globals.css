@@ -6,3 +6,13 @@
   margin: 0;
   font-family: "Acme", sans-serif;
 }
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #e22329;
+  border-radius: 6px;
+}
