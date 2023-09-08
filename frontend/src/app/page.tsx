@@ -2,11 +2,20 @@
 import products from "../helpers/utils/products";
 import { useEffect, useState } from "react";
 import ProductCard from "@/components/ProductCard";
-import { InputSearch, ProductsContent } from "./styles";
+import {
+  InputContainer,
+  InputFavorite,
+  InputSearch,
+  ProductsContent,
+} from "./styles";
 import { Product } from "@/models/ProductProps.model";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 
 export default function Home() {
+  const favorite = useSelector((state: RootState) => state.favoriteReducer);
   const [acmeProducts, setAcmeProducts] = useState([] as Product[]);
+  const [flagFavorites, setFlagFavorites] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState([] as Product[]);
 
   useEffect(() => {
@@ -20,18 +29,48 @@ export default function Home() {
     setFilteredProducts(acmeProducts);
   }, []);
 
+  useEffect(() => {
+    if (flagFavorites) {
+      setFilteredProducts(favorite.currentFavorites);
+    } else {
+      setFilteredProducts(acmeProducts);
+    }
+  }, [flagFavorites]);
+
   const filterBySearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const search = event.target.value.toLowerCase();
-    setFilteredProducts(
-      acmeProducts.filter((element) =>
-        element.name.toLowerCase().includes(search)
-      )
-    );
+
+    if (flagFavorites) {
+      setFilteredProducts(
+        favorite.currentFavorites.filter((element) =>
+          element.name.toLowerCase().includes(search)
+        )
+      );
+    } else {
+      setFilteredProducts(
+        acmeProducts.filter((element) =>
+          element.name.toLowerCase().includes(search)
+        )
+      );
+    }
   };
 
   return (
     <>
-      <InputSearch placeholder="Buscar produto..." onChange={filterBySearch} />
+      <InputContainer>
+        <InputSearch
+          placeholder="Buscar produto..."
+          onChange={filterBySearch}
+        />
+        <div>
+          <InputFavorite
+            onChange={() => setFlagFavorites(!flagFavorites)}
+            type="checkbox"
+            id="favorite-filter"
+          />
+          <label htmlFor="favorite-filter">Favoritos</label>
+        </div>
+      </InputContainer>
       <ProductsContent>
         {filteredProducts.length == 0
           ? acmeProducts.map((element) => {
@@ -43,6 +82,7 @@ export default function Home() {
                   name={element.name}
                   photo={element.photo}
                   description={element.description}
+                  quantity={element.quantity}
                 />
               );
             })
@@ -55,6 +95,7 @@ export default function Home() {
                   name={element.name}
                   photo={element.photo}
                   description={element.description}
+                  quantity={element.quantity}
                 />
               );
             })}

@@ -1,6 +1,5 @@
 import { verbs, adjectives, descriptions } from "../constants/productsVerbsAdjectives";
 import { Product } from "@/models/ProductProps.model";
-import axios from 'axios'
 
 const length = verbs.length >= adjectives.length ? adjectives.length : verbs.length;
 let products = [] as Product[], nameLength = 0, price = 0, photosArray = [] as string[];
@@ -30,16 +29,16 @@ for (let i = 0; i < length; i++) {
   }
 
   products.push({
+    id: i,
     price: price,
     photo: photosArray[photoNum],
     name: verbs[verbNum] + " " + adjectives[adjectiveNum],
     description: descriptions[descriptionNum],
+    quantity: 0,
   });
 
   verbs.splice(verbNum, 1);
   adjectives.splice(adjectiveNum, 1);
-
-  axios.post("http://localhost:3000/products", products[i]);
 }
 
 export default products;

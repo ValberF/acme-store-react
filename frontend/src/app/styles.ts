@@ -8,11 +8,32 @@ export const ProductsContent = styled.div`
   padding: 70px 60px;
 `;
 
+export const InputContainer = styled.div`
+  display: flex;
+  align-items: center;
+
+  label {
+    font-size: 21px;
+    margin-left: 8px;
+  }
+`;
+
 export const InputSearch = styled.input`
   outline: none;
   font-size: 21px;
 
   width: 30%;
+
+  border-radius: 6px;
+  border: 1px solid #a2a2a2;
+  padding: 8px;
+  margin-left: 60px;
+  margin-top: 30px;
+`;
+
+export const InputFavorite = styled.input`
+  outline: none;
+  font-size: 21px;
 
   border-radius: 6px;
   border: 1px solid #a2a2a2;

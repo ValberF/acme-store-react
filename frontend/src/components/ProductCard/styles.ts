@@ -15,6 +15,7 @@ export const Card = styled.div`
     height: 70%;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
+    cursor: pointer;
   }
 
   div {
@@ -26,6 +27,25 @@ export const Card = styled.div`
     height: 40%;
 
     padding: 0 15px;
+  }
+
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+
+    span {
+      display: flex;
+      justify-content: center;
+
+      font-size: 16px;
+      background-color: #ecf54c;
+      border-radius: 10px;
+      padding: 4px;
+      width: 140px;
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+      cursor: pointer;
+    }
   }
 `;
 

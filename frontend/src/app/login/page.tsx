@@ -9,9 +9,30 @@ import {
   LoginSection,
   RegisterSection,
 } from "./styles";
+import { login } from "../../redux/user/slice";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
   const [userRegister, setUserRegister] = useState({} as User);
+  const [userLogin, setUserLogin] = useState({} as User);
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const loginUser = () => {
+    let users = JSON.parse(localStorage.getItem("_users") || "[]");
+    let user =
+      users.find((element: User) => element.email === userLogin.email) &&
+      users.find((element: User) => element.password === userLogin.password);
+
+    if (user) {
+      dispatch(login(user));
+      localStorage.setItem("_access", JSON.stringify(true));
+      router.push("/");
+    } else {
+      alert("Email ou senha incorretos!");
+    }
+  };
 
   const registerUser = () => {
     let users = [] as User[];
@@ -25,19 +46,29 @@ export default function Login() {
     }
   };
 
-  const handleName = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleLoginEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUserLogin({ ...userLogin, email: event.target.value });
+  };
+
+  const handleLoginPassoword = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUserLogin({ ...userLogin, password: event.target.value });
+  };
+
+  const handleRegisterName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUserRegister({ ...userRegister, name: event.target.value });
   };
 
-  const handleEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleRegisterEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUserRegister({ ...userRegister, email: event.target.value });
   };
 
-  const handlePhone = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleRegisterPhone = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUserRegister({ ...userRegister, phone: event.target.value });
   };
 
-  const handlePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleRegisterPassword = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setUserRegister({ ...userRegister, password: event.target.value });
   };
 
@@ -47,10 +78,20 @@ export default function Login() {
         <LoginSection>
           <h1>Login</h1>
           <InputContainer>
-            <Input type="email" placeholder="E-mail" />
-            <Input type="password" placeholder="Senha" />
+            <Input
+              type="email"
+              value={userLogin.email}
+              onChange={handleLoginEmail}
+              placeholder="E-mail"
+            />
+            <Input
+              type="password"
+              value={userLogin.password}
+              onChange={handleLoginPassoword}
+              placeholder="Senha"
+            />
           </InputContainer>
-          <Button>Confimar</Button>
+          <Button onClick={loginUser}>Confimar</Button>
         </LoginSection>
         <RegisterSection>
           <h1>Cadastre-se</h1>
@@ -58,25 +99,25 @@ export default function Login() {
             <Input
               type="text"
               value={userRegister.name}
-              onChange={handleName}
+              onChange={handleRegisterName}
               placeholder="Nome"
             />
             <Input
               type="email"
               value={userRegister.email}
-              onChange={handleEmail}
+              onChange={handleRegisterEmail}
               placeholder="E-mail"
             />
             <Input
               type="text"
               value={userRegister.phone}
-              onChange={handlePhone}
+              onChange={handleRegisterPhone}
               placeholder="Telefone"
             />
             <Input
               type="password"
               value={userRegister.password}
-              onChange={handlePassword}
+              onChange={handleRegisterPassword}
               placeholder="Senha"
             />
           </InputContainer>

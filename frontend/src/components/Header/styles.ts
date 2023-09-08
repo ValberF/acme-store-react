@@ -14,14 +14,12 @@ export const HeaderContent = styled.div`
   a {
     margin-left: 14%;
   }
-
-    
 `;
 
 export const NavContent = styled.nav`
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 25px;
     width: 15%;
 
     a {
@@ -30,6 +28,10 @@ export const NavContent = styled.nav`
       text-decoration: inherit;
       color: inherit;
     }
+
+    #logged {
+      font-size: 1rem;
+    }
 `;
 
 export const CartContent = styled.div`
@@ -37,4 +39,8 @@ export const CartContent = styled.div`
     align-items: center;
     gap: 10px;
     font-size: 18px;
+
+    svg {
+      cursor: pointer;
+    }
 `;

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
     "@types/node": "20.5.8",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
@@ -19,7 +20,12 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.10.1",
+    "react-redux": "^8.1.2",
+    "redux": "^4.2.1",
     "styled-components": "^6.0.7",
     "typescript": "5.2.2"
+  },
+  "devDependencies": {
+    "miragejs": "^0.1.47"
   }
 }
