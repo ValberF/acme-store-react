@@ -62,7 +62,7 @@ export default function ProductPage() {
         {products.currentCart ? (
           products.currentCart.map((element) => {
             return (
-              <ProductContent>
+              <ProductContent key={element.id}>
                 <Image
                   src={element.photo}
                   width={300}
