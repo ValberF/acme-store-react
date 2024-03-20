@@ -18,12 +18,12 @@ Projeto em React/Next que implementa uma loja de produtos Acme, que consiste em 
 ## Execução do Projeto
 
 ***
-npm i
-npm run dev
+- npm i
+- npm run dev
 ***
 
 ## Building project
 ***
-npm i
-npm run build
+- npm i
+- npm run build
 ***
